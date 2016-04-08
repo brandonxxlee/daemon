@@ -129,12 +129,13 @@ def get_all_data(connectedDevices):
             red = int(color_data[0] / lum * 256)
             green = int(color_data[1] / lum * 256)
             blue = int(color_data[2] / lum * 256)
-            all_data[str(uid) + "1"] = [red, green, blue, lum, get_hue(red, green, blue)]
+            all_data[str(uid) + "1"] = [red, green, blue, lum, get_hue(red, green, blue
             continue
         if h.getDeviceName(int(device_type)) == "ServoControl":
             for device_id in uid_to_device_id(uid, 4):
                 if device_id not in all_servos:
                     all_servos[device_id] = 0
+                    h.writeValue(device_id_to_uid(device_id), "toggle" + str(device_id_to_index(device_id))) 
                     h.writeValue(device_id_to_uid(device_id), "servo" + str(device_id_to_index(device_id)), 0)
         if not tup_nest:
             continue
